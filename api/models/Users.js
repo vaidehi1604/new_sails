@@ -6,36 +6,37 @@
  */
 
 module.exports = {
-
-  
-
-   attribute:{
-username:{
-  type:"string",
-  required: true,
-}
-,
-email:{
-  type:"string",
-  required:true,
-  isEmail:true,
-  unique:true
-},
-password:{
-  type:"string",
-  required:true
-},
-image:{
-  type:"string"
-},
-post:{
-  collection:"post",
-  via:"owner"
-}
-  
-
-
+  attribute: {
+    username: {
+      type: "string",
+      required: true,
+    },
+    email: {
+      type: "string",
+      required: true,
+      isEmail: true,
+      unique: true,
+    },
+    password: {
+      type: "string",
+      required: true,
+    },
+    image: {
+      type: "string",
+    },
+    post: {
+      collection: "post",
+      via: "owner",
+    },
+    followers: {
+      type: "json",
+    },
+    following: {
+      type: "json",
+    },
+    like: {
+      collection:'like',
+      via: 'owner'
+    },
   },
-
 };
-

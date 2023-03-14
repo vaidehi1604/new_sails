@@ -1,4 +1,15 @@
 {
   "Welcome": "Welcome",
-  "A brand new app.": "A brand new app."
+  "A brand new app.": "A brand new app.",
+  "email":"email already exists!!",
+  "notUser":"user not found!!",
+  "token":"token generated successfully!",
+  "nottoken":"token not generated!",
+  "notlogin":"not login",
+  "dataupdate":"data updated successfully!!",
+  "notupdated":"data not updated!!",
+  "dataStore":"data store successfully",
+  "notStore":"data not store successfully",
+  "notpost": "post not uploaded"
+
 }

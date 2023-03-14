@@ -11,8 +11,12 @@
 module.exports.routes = {
 //user routes
 "POST /user":"UsersController.createUser",
+"POST /user/login":"UsersController.userLogin",
+
 "PATCH /user/:id":"UsersController.updatepws",
 //post routes
 "POST /post":"PostController.createPost",
-"PATCH /post/:id":"PostController.likeBtn"
+"PATCH /post/:owner":"PostController.likeBtn",
+//Like
+"POST /like":"LikeController.addLike"
 };

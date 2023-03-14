@@ -27,7 +27,8 @@ module.exports = {
       type: "string",
     },
     like: {
-      type: "json",
+      collection:'like',
+      via: 'owner'
     },
     comments: {
       type: "string",
