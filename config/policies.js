@@ -18,5 +18,11 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
-
+  LikeController:{
+    "*":"userLoggedIn"
+  }
+,
+CommentsController:{
+  "*":"userLoggedIn"
+}
 };

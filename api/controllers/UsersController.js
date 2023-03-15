@@ -79,7 +79,7 @@ module.exports = {
         try {
           const token = await sails.helpers.generateToken(email, user.id, "8h");
           console.log(token);
-          const userUpdate = await Users.updateOne({ email }, { token: token });
+          const userUpdate = await Users.updateOne({ email },{ token: token });
           return res.status(200).json({
             message: sails.__("token", lang),
             token: token,
@@ -99,6 +99,28 @@ module.exports = {
       }
     }
   },
+//user can seen all user 
+getAllUser:async(req,res)=>{
+  const lang = req.getLocale();
+
+try {
+  const getUser=await Users.find()
+  console.log(getUser);
+  return res.status(200).json({
+    count:doc.length,
+    message:sails.__("getUser",lang),
+    getUser:getUser,
+  })
+  
+} catch (error) {
+  return res.status(200).json({
+    message:sails.__("notgetUser",lang),
+   
+  })
+}
+
+},
+
   //update pws and image
   updatepws: async (req, res) => {
     const lang = req.getLocale();

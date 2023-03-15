@@ -38,5 +38,9 @@ module.exports = {
       collection:'like',
       via: 'owner'
     },
+    comment: {
+      collection:'comment',
+      via: 'user'
+    },
   },
 };

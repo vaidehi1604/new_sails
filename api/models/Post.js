@@ -26,17 +26,19 @@ module.exports = {
     date: {
       type: "string",
     },
-    like: {
-      collection:'like',
-      via: 'owner'
-    },
-    comments: {
-      type: "string",
-    },
-    owner:{
-      model:"users",
-      required: true,
 
-    }
+    like: {
+      collection: "like",
+      via: "postId",
+    },
+    comment: {
+      collection: "comment",
+      via: "post",
+    },
+
+    owner: {
+      model: "users",
+      required: true,
+    },
   },
 };

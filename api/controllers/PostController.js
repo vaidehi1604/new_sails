@@ -8,7 +8,7 @@
 module.exports = {
   createPost: async (req, res) => {
     const lang = req.getLocale();
-
+    const newDate = new Date().toLocaleDateString();
     try {
       const { title, content, createdBy, date, owner } = req.body;
       req
@@ -33,9 +33,9 @@ module.exports = {
                 content,
                 image: imageFd,
                 createdBy,
-                date,
-                like: {},
-                comments: {},
+                date:newDate,
+                // like:false,
+                // comment: {},
                 owner,
               }).fetch();
               return res.status(201).json({
@@ -59,24 +59,6 @@ module.exports = {
       });
     }
   },
-  //user like post
-  likeBtn: async (req, res) => {
-    try {
-      const { owner } = req.params;
-      const user = await Users.find({ id: id });
-
-      if ((owner = user.id)) {
-        const like = await Post.update({ owner: owner }).set({
-          like: id + "like",
-        });
-      }
-      return res.status(200).json({
-        message: " like your post!!",
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: "not like  post!!",
-      });
-    }
-  },
+  
+ 
 };
