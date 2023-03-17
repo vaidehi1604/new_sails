@@ -104,10 +104,10 @@ getAllUser:async(req,res)=>{
   const lang = req.getLocale();
 
 try {
-  const getUser=await Users.find()
+  // const getUser=await Users.find()
+  const getUser= await Users.find({ limit:2, skip:1 });
   console.log(getUser);
   return res.status(200).json({
-    count:doc.length,
     message:sails.__("getUser",lang),
     getUser:getUser,
   })
