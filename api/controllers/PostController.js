@@ -11,6 +11,7 @@ module.exports = {
     const newDate = new Date().toLocaleDateString();
     try {
       const { title, content, createdBy, date, owner } = req.body;
+      const userId = req.userData.id;
       req
         .file("image")
         .upload({ maxBytes: 10000000 }, async (err, uploadedFiles) => {
@@ -33,32 +34,44 @@ module.exports = {
                 content,
                 image: imageFd,
                 createdBy,
-                date:newDate,
-                // like:false,
-                // comment: {},
-                owner,
+                date: newDate,
+                owner: userId,
               }).fetch();
               return res.status(201).json({
                 message: sails.__("dataStore", lang),
                 posts: posts,
               });
             } catch (error) {
-              return res
-                .status(404)
-                .json({
-                  message: sails.__("notStore", lang),
-                  error: error + "hello",
-                });
+              return res.status(404).json({
+                message: sails.__("notStore", lang),
+                error: error + "hello",
+              });
             }
           }
         });
     } catch (error) {
-      return res.json({
+      return res.status(500).json({
         message: sails.__("notStore", lang),
         error: error + "hello",
       });
     }
   },
-  
- 
+  //get post with pagination
+  getPost:async(req,res)=>{
+    const lang=req.getLocale();
+    try {
+      const limit = req.query.limit || 1;
+      const skip = req.query.skip || 0;
+      //get post with pagination
+      const getPost = await Post.find({ limit: limit, skip: skip });
+      return res.status(201).json({
+        message: sails.__("dataGet", lang),
+        getPost: getPost,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: sails.__("notGet", lang),
+      });
+    }
+  }
 };
