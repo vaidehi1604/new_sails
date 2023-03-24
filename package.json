@@ -6,8 +6,11 @@
   "keywords": [],
   "dependencies": {
     "@sailshq/lodash": "^3.10.3",
+    "api": "^5.0.8",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
+    "following": "^1.1.0",
+    "generate": "^0.14.0",
     "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.21",
     "sails": "^1.5.4",
