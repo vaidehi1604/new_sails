@@ -4,10 +4,19 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = {
+
+  adduser:async(req,res)=>{
+
+    var username=await Like.find({username:'khushal'}).populate('users');
+    sails.log('Wow, there are %d users named Finn.', username.length);
+  sails.log('Check it out, some of them probably have a dad named Joshua or Martin:', username);
+  
+  return res.json(username);
+  },
   createUser: async (req, res) => {
     const lang = req.getLocale();
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password,following } = req.body;
       req
         .file("image")
         .upload({ maxBytes: 10000000 }, async (err, uploadedFiles) => {
@@ -37,7 +46,8 @@ module.exports = {
                   password: hash,
                   image: imageFd,
                   followers: {},
-                  following: {},
+                  following
+                 
                 }).fetch();
                 return res.status(201).json({
                   message: sails.__("dataStore", lang),
@@ -104,8 +114,8 @@ getAllUser:async(req,res)=>{
   const lang = req.getLocale();
 
 try {
-  // const getUser=await Users.find()
-  const getUser= await Users.find({ limit:2, skip:1 });
+  const getUser=await Users.find()
+  // const getUser= await Users.find({ limit:2, skip:1 });
   console.log(getUser);
   return res.status(200).json({
     message:sails.__("getUser",lang),
@@ -143,6 +153,27 @@ try {
       return res.status(500).json({
         error: error + "err",
         message: sails.__("notupdate", lang),
+      });
+    }
+  },
+  //user Logout
+  userLogout: async (req, res) => {
+    const lang = req.getLocale();
+
+    try {
+      const { email } = req.userData;
+      console.log(email);
+      const users = await Users.findOne({ email });
+      console.log(users);
+      const userUpdate = await Users.updateOne({ email }).set({ token: " " });
+
+      return res.status(200).json({
+        message: sails.__("userLogout", lang),
+        userUpdate:userUpdate
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: sails.__("notLogout", lang),
       });
     }
   },
