@@ -17,12 +17,21 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': true,
   LikeController:{
     "*":"userLoggedIn"
   }
 ,
 CommentsController:{
   "*":"userLoggedIn"
+},
+PostController:{
+  "*":"userLoggedIn"
+},
+UsersController:{
+"userLogout":"userLoggedIn"
+},
+FollowingController:{
+  "userFollowing":"userLoggedIn"
 }
 };
