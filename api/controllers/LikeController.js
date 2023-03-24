@@ -6,12 +6,29 @@
  */
 
 module.exports = {
+  adduser: async (req, res) => {
+    try {
+      var username = await Like.find({ like: "true" }).populate("postId");
+      var user = await Like.find({ like: "true" }).populate("owner");
+
+      return res.json({
+        message: " store data !!",
+        username: username,
+        user: user,
+      });
+    } catch (error) {
+      return res.json({
+        error: error + "err",
+        message: " store data !!",
+      });
+    }
+  },
   addLike: async (req, res) => {
     const lang = req.getLocale();
     try {
       // console.log(req.userData);
       const userId = req.userData.id;
-      const {postId} = req.body;
+      const { postId } = req.body;
       //find user
       const user = await Users.findOne({ id: userId });
       //find post
