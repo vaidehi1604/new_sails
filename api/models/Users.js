@@ -32,7 +32,7 @@ module.exports = {
       type: "json",
     },
     following: {
-      type: "json",
+     model:'following'
     },
     like: {
       collection:'like',
